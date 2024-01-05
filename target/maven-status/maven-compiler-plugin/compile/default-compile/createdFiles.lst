@@ -1,0 +1,5 @@
+com\websocket\sock\webSocket\configuration\WebSocketConfig.class
+com\websocket\sock\SockApplication.class
+com\websocket\sock\webSocket\response\Response.class
+com\websocket\sock\webSocket\request\Request.class
+com\websocket\sock\webSocket\controller\ControllerWebSocket.class
