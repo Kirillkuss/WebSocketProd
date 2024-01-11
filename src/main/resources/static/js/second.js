@@ -1,38 +1,38 @@
 var stompClient = null;
-function setConnectedtwo(connected) {
-    document.getElementById('connect').disabled = connected;
-    document.getElementById('disconnect').disabled = !connected;
+function setConnectedSecond(connected) {
+    document.getElementById('connectSecond').disabled = connected;
+    document.getElementById('disconnectSecond').disabled = !connected;
     document.getElementById('conversationDivTwo').style.visibility = connected ? 'visible' : 'hidden';
     document.getElementById('responseTwo').innerHTML = '';
 }
 
-function connectTwo() {
-    var socket = new SockJS('/end');
+function connectSecond() {
+    var socket = new SockJS('/second-end-point');
     stompClient = Stomp.over(socket);  
     stompClient.connect({}, function(frame) {
-        setConnectedtwo(true);
+        setConnectedSecond(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/firstTopic/send', function( responses ) {
-            showMessageOutputTwo(JSON.parse( responses.body ));
+        stompClient.subscribe('/topic/second', function( responses ) {
+            showMessageOutputSecond(JSON.parse( responses.body ));
         });
     });
 }
 
-function disconnectTwo() {
+function disconnectSecond() {
     if(stompClient != null) {
         stompClient.disconnect();
     }
-    setConnectedtwo(false);
+    setConnectedSecond(false);
     console.log("Disconnected");
 }
 
-function sendMessageTwo() {
+function sendMessageSecond() {
     var text = document.getElementById('textTwo').value;
-    stompClient.send("/test/end", {}, 
+    stompClient.send("/prefix/second-end-point", {}, 
       JSON.stringify({ 'text':text}));
 }
 
-function showMessageOutputTwo( responses ) {
+function showMessageOutputSecond( responses ) {
     var response = document.getElementById('responseTwo');
     var p = document.createElement('p');
     p.appendChild(document.createTextNode( responses.text ));

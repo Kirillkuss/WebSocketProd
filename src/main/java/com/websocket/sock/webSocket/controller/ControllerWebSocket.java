@@ -5,24 +5,23 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import com.websocket.sock.webSocket.request.Request;
 import com.websocket.sock.webSocket.response.Response;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class ControllerWebSocket {
     
-    @MessageMapping("/web")
-    @SendTo("/firstTopic/sendMessage")
-    public Response send( Request request) throws Exception {
-        log.info( "Th First Method");
+    @MessageMapping("/first-end-point")
+    @SendTo("/topic/first")
+    public Response firstMessage( Request request) throws Exception {
+        log.info( "Message 1: " + request.getText() );
         return new Response( request.getText());
     }
 
-    @MessageMapping("/end")
-    @SendTo("/firstTopic/send")
-    public Response messageTwo( Request request) throws Exception {
-        log.info( "The Second Method");
+    @MessageMapping("/second-end-point")
+    @SendTo("/topic/second")
+    public Response secondMessage( Request request) throws Exception {
+        log.info( "Message 2 >>> " + request.getText() );
         return new Response( request.getText());
     }
 

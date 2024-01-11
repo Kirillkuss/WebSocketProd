@@ -1,38 +1,38 @@
 var stompClient = null;
-function setConnected(connected) {
-    document.getElementById('connect').disabled = connected;
-    document.getElementById('disconnect').disabled = !connected;
+function setConnectedFirst(connected) {
+    document.getElementById('connectFirst').disabled = connected;
+    document.getElementById('disconnectFirst').disabled = !connected;
     document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
     document.getElementById('response').innerHTML = '';
 }
 
-function connect() {
-    var socket = new SockJS('/web');
+function connectFirst() {
+    var socket = new SockJS('/first-end-point');
     stompClient = Stomp.over(socket);  
     stompClient.connect({}, function(frame) {
-        setConnected(true);
+        setConnectedFirst(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/firstTopic/sendMessage', function( responses ) {
-            showMessageOutput(JSON.parse( responses.body ));
+        stompClient.subscribe('/topic/first', function( responses ) {
+            showMessageOutputFirst(JSON.parse( responses.body ));
         });
     });
 }
 
-function disconnect() {
+function disconnectFirst() {
     if(stompClient != null) {
         stompClient.disconnect();
     }
-    setConnected(false);
+    setConnectedFirst(false);
     console.log("Disconnected");
 }
 
-function sendMessage() {
+function sendMessageFirst() {
     var text = document.getElementById('text').value;
-    stompClient.send("/test/web", {}, 
+    stompClient.send("/prefix/first-end-point", {}, 
       JSON.stringify({ 'text':text}));
 }
 
-function showMessageOutput( responses ) {
+function showMessageOutputFirst( responses ) {
     var response = document.getElementById('response');
     var p = document.createElement('p');
     p.appendChild(document.createTextNode( responses.text ));
