@@ -24,5 +24,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
          
          registry.addEndpoint("/second-end-point");
          registry.addEndpoint("/second-end-point").withSockJS();
+         
+         registry.addEndpoint("/stock-ticks").setAllowedOriginPatterns("*").withSockJS();
     }
 }

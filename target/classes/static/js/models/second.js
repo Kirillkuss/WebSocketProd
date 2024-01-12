@@ -33,6 +33,9 @@ function sendMessageSecond() {
 }
 
 function showMessageOutputSecond( responses ) {
+    if( document.getElementById('responseTwo') != null ){
+        $('p:even').empty();
+    }
     var response = document.getElementById('responseTwo');
     var p = document.createElement('p');
     p.appendChild(document.createTextNode( responses.text ));
