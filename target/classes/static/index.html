@@ -11,38 +11,36 @@
         <script src="js/models/second.js"></script>
         <script src="js/models/third.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <script type="text/javascript">
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <style>
-
         </style>
     </head>
-    <body onload="disconnectFirst(), disconnectSecond(), disconnectThird()">
+    <body onload="disconnectFirst(), disconnectSecond(), connectThird()">
         <div class="text-bg-success p-3" style="width: 1900px; height: 950px;">
         <h1 style="left: 280px; position: fixed;">WebSocket</h1>
 
-            <div class="card" style="width: 22rem; top: 72px; position: fixed;">
+            <div class="card" style="width: 22rem; top: 72px; height: 150px; position: fixed;">
                 <div class="card-body">
                     <button class="btn btn-primary" id="connectFirst" onclick="connectFirst();">Подключиться</button>
-                    <button class="btn btn-primary" id="disconnectFirst" disabled="disabled" onclick="disconnectFirst();disconnectSecond();">Отключиться</button>
+                    <button class="btn btn-primary" id="disconnectFirst" disabled="disabled" onclick="disconnectFirst();disconnectSecond();disconnectThird();">Отключиться</button>
                     <h1></h1>
                     <div id="conversationDiv">
                         <input type="text" id="text" placeholder="Write a message..."/>
                         <button class="btn btn-success" id="sendMessage" onclick="sendMessageFirst();">Отправить</button>
-                        <p id="response"></p>
+                        <div id="response"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="card" style="width: 22rem; left: 400px; top: 72px; position: fixed;" id = "FormSecond">
+            <div class="card" style="width: 22rem; left: 400px; top: 72px; height: 150px; position: fixed;" id = "FormSecond">
                 <div class="card-body">
                     <button class="btn btn-primary" id="connectSecond" onclick="connectSecond();">Подключиться</button>
-                    <button class="btn btn-primary" id="disconnectSecond" disabled="disabled" onclick="disconnectFirst();disconnectSecond();">Отключиться</button>
+                    <button class="btn btn-primary" id="disconnectSecond" disabled="disabled" onclick="disconnectFirst();disconnectSecond();disconnectThird();">Отключиться</button>
                     <h1></h1>
                     <div id="conversationDivTwo">
                         <input type="text" id="textTwo" placeholder="Write a message..."/>
                         <button class="btn btn-success" id="sendMessageTwo" onclick="sendMessageSecond();">Отправить</button>
-                        <p id="responseTwo"></p>
+                        <div id="responseTwo"></div>
                     </div>
                 </div>
             </div>
@@ -51,7 +49,7 @@
                 
                 <div class="card-body">
                     <button class="btn btn-primary" id="connectThird" onclick="connectThird();">Подключиться</button>
-                    <button class="btn btn-primary" id="disconnectThird" disabled="disabled" onclick="disconnectThird();">Отключиться</button>
+                    <button class="btn btn-primary" id="disconnectThird" disabled="disabled" onclick="disconnectFirst();disconnectSecond();disconnectThird();">Отключиться</button>
 
                     <div class="p-3 mb-3 bg-success text-dark" style="width: 4rem; left: 1000px; top: 180px;  position: fixed;" id = "div1">0</div>
                     <div class="p-3 mb-3 bg-success text-dark" style="width: 4rem; left: 1000px; top: 250px;  position: fixed;" id = "div2">0</div>
@@ -68,6 +66,17 @@
                     <div class="p-3 mb-3 bg-secondary text-dark" style="width: 10rem; left: 800px; top: 530px;  position: fixed;" id = "div12">0</div>
                 </div>
             </div>
+
+            <div class="card" style="width: 46rem; top: 300px; height: 400px; position: fixed;" id = "FormThird">
+
+                <canvas id="myChart" style="width:100%; max-width:800px; top: 310px; position: fixed;" ></canvas>
+            </div>
+
+            
+            <script>
+    
+                getGraph();
+            </script>
         </div>
     </body>
 </html>

@@ -33,12 +33,6 @@ function sendMessageFirst() {
 }
 
 function showMessageOutputFirst( responses ) {
-    if( document.getElementById('response') != null ){
-        $('p:even').hide('');
-    }
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.appendChild(document.createTextNode( responses.text ));
-    response.appendChild(p);
+    document.getElementById('response').textContent ="Response: " + responses.text;
 }
 
